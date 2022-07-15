@@ -227,7 +227,7 @@ def ReadMatchedKeypointsFile(filename, scale_f):
 	return list_pt1, list_pt2, status, dist
 
 
-def PlotMatchesPairImages(query_img, train_img, list_pt1, list_pt2, status):
+def PlotMatchesPairImages(query_img, train_img, list_pt1, list_pt2, status, scale_width, scale_height):
 
         assert(len(list_pt1) == len(list_pt2))
 
@@ -246,8 +246,8 @@ def PlotMatchesPairImages(query_img, train_img, list_pt1, list_pt2, status):
         good_matches = []
         
         for i in range(len(vec_pt1)):
-            queryKeypoints.append(cv2.KeyPoint(vec_pt1[i,0],vec_pt1[i,1],0))
-            trainKeypoints.append(cv2.KeyPoint(vec_pt2[i,0],vec_pt2[i,1],0))
+            queryKeypoints.append(cv2.KeyPoint(vec_pt1[i,0]/scale_width,vec_pt1[i,1]/scale_height,0))
+			trainKeypoints.append(cv2.KeyPoint(vec_pt2[i,0]/scale_width,vec_pt2[i,1]/scale_height,0))
             if status[i] == 1:
                 good_matches.append(cv2.DMatch(i,i,0))
 
@@ -305,6 +305,13 @@ def MakeVideoPair(opt, id1, id2):
 		imheight = 450
 	
 	new_imwidth = 640
+
+	if method == 'superpoint' or method == 'superglue':
+		scale_width = 640 / imwidth
+		scale_height = 480 / imheight
+	else:
+		scale_width = 1.0
+		scale_height = 1.0
 	
 	cam1 = Frame(os.path.join(datapath,dataset,'images', 'view{:d}'.format(id1), 'rgb'), imwidth, imheight, new_imwidth)
 	cam2 = Frame(os.path.join(datapath,dataset,'images', 'view{:d}'.format(id2), 'rgb'), imwidth, imheight, new_imwidth)
@@ -353,7 +360,7 @@ def MakeVideoPair(opt, id1, id2):
 				if len(status) == 0:
 					tmpimg = cv2.hconcat([img1,match2_img])
 				else:
-					tmpimg = PlotMatchesPairImages(img1, match2_img, list_pt1, list_pt2, status)
+					tmpimg = PlotMatchesPairImages(img1, match2_img, list_pt1, list_pt2, status, scale_width, scale_height)
 
 				if np.sum(np.array(status)) < 12:
 					tmpbanner = cam2.GetNoValidBanner(0)

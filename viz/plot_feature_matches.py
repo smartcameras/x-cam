@@ -42,7 +42,7 @@ from tqdm import tqdm
 
 import cv2 # OpenCV - make sure the OpenCV version is 4.5
 
-# from pdb import set_trace as bp
+from pdb import set_trace as bp
 
 def CheckOpenCvVersion():
 	(major, minor, _) = cv2.__version__.split(".")
@@ -95,6 +95,19 @@ def PlotMatches(datapath, dataset, respath, agent_id, other_id, query_cam_id, ot
 		print('File {:s} does not exist!'.format(filename))
 
 	df = pd.read_csv(filename, sep=';', index_col=False)
+
+	if (dataset == 'gate') or (dataset == 'backyard'):
+		imwidth = 1280
+		imheight = 720
+	elif dataset == 'office':
+		imwidth = 640
+		imheight = 480
+	elif dataset == 'courtyard':
+		imwidth = 800
+		imheight = 450
+	else:
+		imwidth = 1280
+		imheight = 720
 	
 
 	for j in range(0, df.shape[0]):
@@ -122,9 +135,9 @@ def PlotMatches(datapath, dataset, respath, agent_id, other_id, query_cam_id, ot
 			img_tmp = cv2.imread(train_img_name, cv2.IMREAD_GRAYSCALE)
 			train_img = cv2.cvtColor(img_tmp, cv2.COLOR_GRAY2RGB)
 
-			if method == 'superpoint' or method == 'supeglue':
-				scale_width = 640 / query_img.shape[1]
-				scale_height = 480 / query_img.shape[0]
+			if method == 'superpoint' or method == 'superglue':
+				scale_width = 640 / imwidth
+				scale_height = 480 / imheight
 			else:
 				scale_width = 1.0
 				scale_height = 1.0

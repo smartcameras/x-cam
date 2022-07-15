@@ -13,7 +13,8 @@ RESPATH=$C3OD_DIR/20220628_results/
 
 # python process_results.py --respath $RESPATH --method $METHOD --datapath $DATAPATH --overlap_th $OVERLAP_TH --dataset $DATASET --n_runs $N_RUNS --matching_mode $MATCHING_MODE --sac $SAC
 
-for METHOD in dbow rootsift superglue
+# for METHOD in dbow rootsift superglue
+for METHOD in superglue
 do
   echo $METHOD
 
@@ -31,6 +32,6 @@ done
 
 echo "Finished!"
 
-source run_make_video.sh
+source run_make_video_ffmpeg.sh
 
 conda deactivate

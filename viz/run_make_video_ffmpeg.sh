@@ -3,7 +3,8 @@
 METHOD=rootsift
 FPS=2
 
-for METHOD in dbow rootsift superglue
+# for METHOD in dbow rootsift superglue
+for METHOD in superglue
 do
   echo $METHOD
 
