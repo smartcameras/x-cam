@@ -14,13 +14,13 @@ METHOD=dbow # dbow, deepbit, netvlad
 MATCHING_MODE=local #local, global
 
 OVERLAP_TH=50
-N_RUNS=30
+N_RUNS=1
 
 ############################################
 
 
 # for METHOD in dbow deepbit netvlad
-for METHOD in superglue
+for METHOD in superglue superpoint
 do
   echo $METHOD
 

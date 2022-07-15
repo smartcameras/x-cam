@@ -88,7 +88,7 @@ def ReadMatchedKeypointsFile(filename, scale_f):
 
 	return list_pt1, list_pt2, status, dist
 
-def PlotMatches(datapath, dataset, respath, agent_id, other_id, query_cam_id, other_cam_id):
+def PlotMatches(datapath, dataset, respath, agent_id, other_id, query_cam_id, other_cam_id, method):
 	filename=os.path.join(respath,'agent{:d}_vpr_res.csv'.format(query_cam_id))
 	
 	if not os.path.exists(filename):
@@ -121,6 +121,13 @@ def PlotMatches(datapath, dataset, respath, agent_id, other_id, query_cam_id, ot
 			
 			img_tmp = cv2.imread(train_img_name, cv2.IMREAD_GRAYSCALE)
 			train_img = cv2.cvtColor(img_tmp, cv2.COLOR_GRAY2RGB)
+
+			if method == 'superpoint' or method == 'supeglue':
+				scale_width = 640 / query_img.shape[1]
+				scale_height = 480 / query_img.shape[0]
+			else:
+				scale_width = 1.0
+				scale_height = 1.0
 			
 			list_pt1, list_pt2, status, dist = ReadMatchedKeypointsFile(filename, 1.0)
 
@@ -145,8 +152,8 @@ def PlotMatches(datapath, dataset, respath, agent_id, other_id, query_cam_id, ot
 				good_matches = []
 				
 				for i in range(len(vec_pt1)):
-					queryKeypoints.append(cv2.KeyPoint(vec_pt1[i,0],vec_pt1[i,1],0))
-					trainKeypoints.append(cv2.KeyPoint(vec_pt2[i,0],vec_pt2[i,1],0))
+					queryKeypoints.append(cv2.KeyPoint(vec_pt1[i,0]/scale_width,vec_pt1[i,1]/scale_height,0))
+					trainKeypoints.append(cv2.KeyPoint(vec_pt2[i,0]/scale_width,vec_pt2[i,1]/scale_height,0))
 					if status[i] == 1:
 						good_matches.append(cv2.DMatch(i,i,0))
 
@@ -175,8 +182,8 @@ def RunPairPlots(args, id1, id2):
 	for r in tqdm(range(1,n_runs+1)):
 		respath=os.path.join(args.respath, '{:s}_{:d}vs{:d}'.format(dataset,id1,id2), method, 'run{:d}'.format(r))
 
-		PlotMatches(datapath, dataset, respath, id1, id2, 1, 2)
-		PlotMatches(datapath, dataset, respath, id2, id1, 2, 1)	
+		PlotMatches(datapath, dataset, respath, id1, id2, 1, 2, method)
+		PlotMatches(datapath, dataset, respath, id2, id1, 2, 1, method)	
 
 def Run_M3CAM_2_0_Dataset(opt):
 	dataset = opt.dataset
@@ -209,13 +216,14 @@ if __name__ == '__main__':
 	
 	if CheckOpenCvVersion():
 		# Arguments
-		parser = argparse.ArgumentParser(description='CO3D Ground-truth generation')
+		parser = argparse.ArgumentParser(description='CrossCamera View-Overlap Recognition: Plot Matches')
 		parser.add_argument('--dataset', default='gate', type=str)
 		parser.add_argument('--datapath', default='', type=str)
 		parser.add_argument('--respath', default='', type=str)
 		parser.add_argument('--overlap_th', default='50', type=int)
 		# parser.add_argument('--ang_th', default='70', type=int)
-		parser.add_argument('--method', default='dbow', type=str)
+		parser.add_argument('--method', default='dbow', type=str, 
+			choices=['dbow','deepbit', 'netvlad','dbow-m','deepbit-m', 'netvlad-m','rootsift','superpoint','superglue'])
 		parser.add_argument('--n_runs', default='5', type=int)
 		parser.add_argument('--matching_mode', default='local', type=str)
 
