@@ -5,18 +5,11 @@
 # courtyard (4)
 # backyard (4)
 # gate (4)
-# SCENARIOS=(office courtyard backyard gate)
-SCENARIOS=(office courtyard)
+SCENARIOS=(office courtyard backyard gate)
+# SCENARIOS=(office)
 
 ## List of methods
-# DBOW
-# LiST
-# BTST
-# TTST
-# METHODS=(DBoW LiST BTST TTST)
-# METHODS=(deepbit netvlad)
-#METHODS=(deepbit netvlad DBoW LiST BTST TTST)
-METHODS=(dbow deepbit netvlad)
+METHODS=(dbow netvlad deepbit)
 
 
 ## Number of runs
@@ -45,7 +38,7 @@ do
         echo $v1 "vs" $v2
         # DATAPATH=../20220621_results_frequency/${SCENARIO}_${v1}vs${v2}/$METHOD
 
-        DATAPATH=../20220628_results/${SCENARIO}_${v1}vs${v2}/$METHOD
+        DATAPATH=../../20220628_results/${SCENARIO}_${v1}vs${v2}/$METHOD
 
         # for f in 5 7 10 12 15 17 20 # SHARING FREQUENCY
         # for f in 5 10 15 20 25 30 35 40 45 50 75 # INITWND

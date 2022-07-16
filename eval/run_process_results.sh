@@ -24,7 +24,7 @@ ANALYSIS_MODE='none' # frequency, rate, none
 
 # for METHOD in dbow-m netvlad-m deepbit-m
 # for METHOD in dbow netvlad deepbit dbow-m netvlad-m deepbit-m rootsift superpoint superglue
-for METHOD in dbow 
+for METHOD in dbow netvlad deepbit 
 do
   echo $METHOD
 

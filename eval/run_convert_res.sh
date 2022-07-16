@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# source activate Superglue
-# C3OD_DIR=/import/smartcameras-002/alessio/C3OD
+source activate Superglue
+C3OD_DIR=/import/smartcameras-002/alessio/C3OD
 
-conda activate C3OD
-C3OD_DIR=$HOME/Desktop/C3OD
+# conda activate C3OD
+# C3OD_DIR=$HOME/Desktop/C3OD
 
 RESPATH=$C3OD_DIR/20220628_results/
 

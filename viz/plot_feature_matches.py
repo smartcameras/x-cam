@@ -201,24 +201,28 @@ def RunPairPlots(args, id1, id2):
 def Run_M3CAM_2_0_Dataset(opt):
 	dataset = opt.dataset
 
-	if (dataset == 'gate') or (dataset == 'courtyard'):
-		RunPairPlots(opt, 1, 2)
+	if (dataset == 'gate'):
+		# RunPairPlots(opt, 1, 2)
 		RunPairPlots(opt, 1, 3)
-		RunPairPlots(opt, 1, 4)
+		# RunPairPlots(opt, 1, 4)
 		RunPairPlots(opt, 2, 3)
-		RunPairPlots(opt, 2, 4)
-		RunPairPlots(opt, 3, 4)
-	elif dataset == 'office':
-		RunPairPlots(opt, 1, 2)
-		RunPairPlots(opt, 1, 3)
-		RunPairPlots(opt, 2, 3)
-	elif dataset == 'backyard':
+		# RunPairPlots(opt, 2, 4)
+		# RunPairPlots(opt, 3, 4)
+	elif (dataset == 'courtyard'):
 		# RunPairPlots(opt, 1, 2)
 		# RunPairPlots(opt, 1, 3)
-		RunPairPlots(opt, 1, 4)
+		# RunPairPlots(opt, 1, 4)
 		RunPairPlots(opt, 2, 3)
+		RunPairPlots(opt, 2, 4)
 		# RunPairPlots(opt, 3, 4)
-		# RunPairPlots(opt, 2, 4)
+	elif dataset == 'office':
+		RunPairPlots(opt, 1, 2)
+		# RunPairPlots(opt, 1, 3)
+		# RunPairPlots(opt, 2, 3)
+	elif dataset == 'backyard':
+		RunPairPlots(opt, 1, 4)
+		# RunPairPlots(opt, 2, 3)
+		
 
 
 if __name__ == '__main__':

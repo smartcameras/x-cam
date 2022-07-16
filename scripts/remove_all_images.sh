@@ -5,16 +5,15 @@
 # courtyard (4)
 # backyard (4)
 # gate (4)
-SCENARIOS=(gate office backyard courtyard)
-# SCENARIOS=(office)
+SCENARIOS=(office courtyard backyard gate)
 
 ## List of methods
-METHODS=(dbow deepbit netvlad)
-# METHODS=(dbow-m netvlad-m deepbit-m)
+# METHODS=(dbow netvlad deepbit dbow-m netvlad-m deepbit-m rootsift superpoint superglue)
+METHODS=(superglue)
 
 
 ## Number of runs
-R=30
+R=1
 
 for METHOD in ${METHODS[*]}
 do
@@ -53,7 +52,7 @@ do
             # rm -r $DATAPATH/INIT_WND$f/run$r
             # rm -r $DATAPATH/RATE$f/run$r
             # rm -r $DATAPATH/FREQ$f/run$r
-            rm -r $DATAPATH/run$r
+            rm $DATAPATH/run$r/*.png
           done
         # done
       done

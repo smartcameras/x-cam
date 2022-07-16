@@ -20,7 +20,7 @@ N_RUNS=1
 
 
 # for METHOD in dbow deepbit netvlad
-for METHOD in superglue superpoint
+for METHOD in superglue
 do
   echo $METHOD
 
