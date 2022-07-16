@@ -400,7 +400,7 @@ def MakeVideoPair(opt, id1, id2):
 				if len(status) == 0:
 					tmpimg = cv2.hconcat([match1_img,img2])
 				else:
-					tmpimg = PlotMatchesPairImages(match1_img, img2, list_pt2, list_pt1, status)
+					tmpimg = PlotMatchesPairImages(match1_img, img2, list_pt2, list_pt1, status, scale_width, scale_height)
 
 				if np.sum(np.array(status)) < 12:
 					tmpbanner = cam1.GetNoValidBanner(1)
