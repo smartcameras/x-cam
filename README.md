@@ -1,7 +1,12 @@
-# Cross Camera Visual Overlap Recognition
+# Cross-Camera View-Overlap Recognition
 
-Official code of the paper "Cross-Camera Visual Overlap Recognition".
+<p align="center">
+  <img width="60%" height="60%" src="http://www.eecs.qmul.ac.uk/~ax300/xview/blockdiagram.svg">
+</p>
 
+<p align="center">
+<a href="https://arxiv.org/abs/2208.11661">ArXiv</a> | <a href="http://www.eecs.qmul.ac.uk/~ax300/xview/">Webpage</a> |  <a href=https://doi.org/10.5281/zenodo.7235890">Dataset</a>
+</p>
 
 ## Installation
 
@@ -19,6 +24,7 @@ Tested on Linux machine with Ubuntu 18.04 LTS.
 
 ### Instructions
 
+To be added soon.
 
 
 
@@ -67,6 +73,20 @@ The first output file (agent(ID)\_vpr\_res.txt) provides a summary of the detect
 - Number of matched (ORB) binary features
 
 ## Credits
+
+A. Xompero and A. Cavallaro, Cross-Camera View-Overlap Recognition, International Workshop on Distributed Smart Cameras (IWDSC), European Conference on Computer Vision Workshops, 24 October 2022. 
+
+```
+@InProceedings{Xompero2022IWDSC,
+             title = {Cross-Camera View-Overlap Recognition},
+             author = {Xompero, A. and and Cavallaro, A.},
+             booktitle = {Proceedings of the European Conference on Computer Vision Workshops},
+             note = {Internation Workshop on Distributed Smart Cameras},
+             address={Online},
+             month="24" # OCT,
+             year = {2022},
+           }
+```
 
 ## Enquiries, Question and Comments
 
